@@ -132,7 +132,7 @@ async function eliminaProdotto(prodotto) {
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
   const datiForm = new FormData(form);
-
+  
   try {
     await richiesta(`${API}`, { method: "POST", body: datiForm }); 
     mostraMessaggio("Prodotto aggiunto.");
@@ -140,6 +140,20 @@ form.addEventListener("submit", async (event) => {
   } catch (errore) {
     mostraMessaggio(errore.message, true);
   }
+
+  // per passare un JSON
+  // const dati = {
+  //   nome: form.elements.nome.value,
+  //   descrizione: form.elements.descrizione.value,
+  //   prezzo: form.elements.prezzo.value
+  // }
+  // const datiFormattati = JSON.stringify(dati);
+  // fetch('http://localhost:3000/api/prodotti', {
+  //   method: "POST",
+  //   headers: { "Content-Type": "application/json"},
+  //   body: datiFormattati,
+  // })
+
 })
 
 /* ------------------------------------------------ UPDATE */
