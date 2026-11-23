@@ -1,0 +1,4 @@
+node_modules/
+prodotti.db
+img/*
+!img/.gitkeep
