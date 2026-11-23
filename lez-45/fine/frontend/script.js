@@ -105,7 +105,7 @@ function creaCard(prodotto) {
   bottoni.className = "bottoni";
   const modifica = document.createElement("button");
   modifica.textContent = "Modifica";
-  modifica.addEventListener("click", () => iniziaModifica(prodotto.id));
+  modifica.addEventListener("click", () => iniziaModifica(prodotto));
   const elimina = document.createElement("button");
   elimina.textContent = "Elimina";
   elimina.className = "secondario";
@@ -133,9 +133,14 @@ form.addEventListener("submit", async (event) => {
   event.preventDefault();
   const datiForm = new FormData(form);
   
+  // metodo = se abbiamo un id di modifica, il metodo è PUT, altrimenti è POST
+  let metodo = idInModifica ? "PUT" : "POST";
+  let indirizzo = idInModifica ? `${API}/${idInModifica}` : `${API}`;
+  let messaggio = idInModifica ? "Prodotto modificato." : "Prodotto aggiunto."
+
   try {
-    await richiesta(`${API}`, { method: "POST", body: datiForm }); 
-    mostraMessaggio("Prodotto aggiunto.");
+    await richiesta(indirizzo, { method: metodo, body: datiForm }); 
+    mostraMessaggio(messaggio);
     await caricaProdotti();
   } catch (errore) {
     mostraMessaggio(errore.message, true);
@@ -156,13 +161,28 @@ form.addEventListener("submit", async (event) => {
 
 })
 
+bottoneAnnulla.addEventListener("click", () => {
+  idInModifica = null;
+  if(idInModifica) {
+    titoloForm.textContent = `Nuovo prodotto`;
+    bottoneSalva.textContent = "Aggiungi";
+  }
+  form.reset();
+})
+
 /* ------------------------------------------------ UPDATE */
-async function iniziaModifica(id) {
+async function iniziaModifica(prodotto) {
+  idInModifica = prodotto.id;
 
+  form.elements.nome.value = prodotto.nome;
+  form.elements.descrizione.value = prodotto.descrizione;
+  form.elements.prezzo.value = prodotto.prezzo;
+  form.elements.foto.value = "";
+
+  titoloForm.textContent = `Modifica ${prodotto.nome}`;
+  bottoneSalva.textContent = "Salva modifiche";
+  
 }
 
-function esciDallaModifica() {
-
-}
 
 caricaProdotti();
