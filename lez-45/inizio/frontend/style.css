@@ -1,0 +1,103 @@
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  color: #464a51;
+  background: #f4f6fa;
+}
+
+.testata {
+  background: #1380c4;
+  color: white;
+  padding: 1rem;
+}
+.testata h1 { margin: 0; font-size: 1.4rem; }
+
+.layout {
+  max-width: 1100px;
+  margin: 1.5rem auto;
+  padding: 0 1rem;
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+@media (max-width: 760px) {
+  .layout { grid-template-columns: 1fr; }
+}
+
+h2 { margin-top: 0; font-size: 1.1rem; }
+
+.pannello {
+  background: white;
+  border: 1px solid #d5dae3;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+form { display: grid; gap: .3rem; }
+
+label { font-weight: 600; margin-top: .4rem; }
+
+input, textarea, button { font: inherit; }
+input, textarea {
+  width: 100%;
+  min-width: 0;
+  padding: .45rem .6rem;
+  border: 1px solid #d5dae3;
+  border-radius: 6px;
+}
+
+.bottoni { display: flex; gap: .5rem; margin-top: .8rem; }
+
+button {
+  background: #ed8031;
+  color: white;
+  border: 0;
+  border-radius: 6px;
+  padding: .5rem 1rem;
+  cursor: pointer;
+}
+button.secondario {
+  background: white;
+  color: #464a51;
+  border: 1px solid #d5dae3;
+}
+button:disabled { opacity: .5; cursor: wait; }
+
+.piccolo { font-size: .85rem; margin: 0; }
+.messaggio { min-height: 1.4em; margin: .8rem 0 0; }
+.errore { color: #e31119; }
+
+/* la lista dei prodotti */
+.lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.card {
+  background: white;
+  border: 1px solid #d5dae3;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.card img, .card .senza-foto {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  background: #e9edf3;
+}
+.card .senza-foto { display: grid; place-items: center; font-size: .9rem; }
+.card .info { padding: .7rem; flex: 1; }
+.card h3 { margin: 0 0 .3rem; font-size: 1rem; }
+.card .descrizione { margin: 0 0 .5rem; font-size: .9rem; }
+.card .prezzo { margin: 0; font-weight: 700; color: #1380c4; }
+.card .bottoni { padding: 0 .7rem .7rem; margin: 0; }
