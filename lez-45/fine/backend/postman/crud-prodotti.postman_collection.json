@@ -1,0 +1,97 @@
+{
+  "info": {
+    "name": "CRUD prodotti",
+    "description": "Le richieste per il backend dei prodotti. Prima avvia il server con npm start nella cartella backend.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:3000/api/prodotti" }
+  ],
+  "item": [
+    {
+      "name": "1. Elenco dei prodotti",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}"
+      }
+    },
+    {
+      "name": "2. Un prodotto",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/1",
+        "description": "Prova anche un id che non esiste, per esempio 999: risponde 404."
+      }
+    },
+    {
+      "name": "3. Crea un prodotto",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}",
+        "description": "Nella scheda Body, accanto a foto, scegli un'immagine dal computer (Select Files). La foto si può anche lasciare vuota.",
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            { "key": "nome", "value": "Zaino", "type": "text" },
+            { "key": "descrizione", "value": "Zaino da 20 litri con tasca per il portatile.", "type": "text" },
+            { "key": "prezzo", "value": "39.90", "type": "text" },
+            { "key": "foto", "type": "file", "src": [] }
+          ]
+        }
+      }
+    },
+    {
+      "name": "3b. Crea un prodotto (JSON, senza foto)",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nome\": \"Penna\",\n  \"descrizione\": \"Penna a sfera blu.\",\n  \"prezzo\": 2.5\n}"
+        }
+      }
+    },
+    {
+      "name": "4. Modifica un prodotto",
+      "request": {
+        "method": "PUT",
+        "url": "{{baseUrl}}/1",
+        "description": "Si mandano tutti i campi. Se foto resta vuota, il prodotto tiene la foto di prima.",
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            { "key": "nome", "value": "Tazza grande", "type": "text" },
+            { "key": "descrizione", "value": "Tazza in ceramica da 500 ml.", "type": "text" },
+            { "key": "prezzo", "value": "14.90", "type": "text" },
+            { "key": "foto", "type": "file", "src": [] }
+          ]
+        }
+      }
+    },
+    {
+      "name": "5. Elimina un prodotto",
+      "request": {
+        "method": "DELETE",
+        "url": "{{baseUrl}}/1",
+        "description": "Risponde 204, senza contenuto. Una seconda volta lo stesso id risponde 404."
+      }
+    },
+    {
+      "name": "Errore: nome mancante",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}",
+        "description": "Risponde 400 con il messaggio di errore.",
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            { "key": "prezzo", "value": "10", "type": "text" }
+          ]
+        }
+      }
+    }
+  ]
+}

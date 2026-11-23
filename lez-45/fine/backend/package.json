@@ -1,0 +1,19 @@
+{
+  "name": "crud-prodotti-backend",
+  "version": "1.0.0",
+  "description": "Backend minimale per esercitarsi con un CRUD di prodotti (Express + SQLite)",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "reset": "node reset.js"
+  },
+  "dependencies": {
+    "express": "^5.3.0",
+    "multer": "^2.5.0"
+  }
+}
